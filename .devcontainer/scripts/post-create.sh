@@ -41,12 +41,6 @@ fi
 
 printf '\nDev container post-create complete.\n'
 
-echo "Installing hetzner cli"
-curl -sSLO https://github.com/hetznercloud/cli/releases/latest/download/hcloud-linux-amd64.tar.gz
-sudo tar -C /usr/local/bin --no-same-owner -xzf hcloud-linux-amd64.tar.gz hcloud
-rm hcloud-linux-amd64.tar.gz
-
-echo "Installing vagrant"
-wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(grep -oP '(?<=UBUNTU_CODENAME=).*' /etc/os-release || lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-sudo apt update && sudo apt install -y vagrant
+echo "Installing k3s"
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--docker" sh -
+sudo sh -c "k3s server --docker > /var/log/k3s.log 2>&1 &"
