@@ -42,5 +42,7 @@ fi
 printf '\nDev container post-create complete.\n'
 
 echo "Installing k3s"
+sudo apt update
+sudo apt install -y socat conntrack
 curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--docker" sh -
 sudo sh -c "k3s server --docker > /var/log/k3s.log 2>&1 &"
