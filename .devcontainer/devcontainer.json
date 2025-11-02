@@ -1,0 +1,78 @@
+{
+  "name": "Udacity Cloud Native Developer",
+  "dockerFile": "Dockerfile",
+  "context": "..",
+  "remoteUser": "vscode",
+  "updateRemoteUserUID": true,
+  "features": {
+    "ghcr.io/devcontainers/features/desktop-lite:1": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {},
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.13"
+    }
+  },
+  "runArgs": [
+    "--init"
+  ],
+  "containerEnv": {
+    "PYTHONUNBUFFERED": "1",
+    "PIP_DISABLE_PIP_VERSION_CHECK": "1"
+  },
+  "forwardPorts": [
+    // 8000,
+    // 8265,
+    // 8501,
+    // 9090
+  ],
+  "portsAttributes": {
+    // "8000": {
+    //   "label": "FastAPI"
+    // },
+    // "8265": {
+    //   "label": "Ray Dashboard"
+    // },
+    // "8501": {
+    //   "label": "Streamlit"
+    // },
+    // "9090": {
+    //   "label": "Prometheus"
+    // }
+  },
+  "postCreateCommand": "bash .devcontainer/scripts/post-create.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-toolsai.jupyter",
+        "ms-azuretools.vscode-docker",
+        "ms-kubernetes-tools.vscode-kubernetes-tools",
+        "ms-vscode-remote.remote-containers",
+        "ms-vscode.makefile-tools",
+        "GitHub.vscode-pull-request-github",
+        "redhat.vscode-yaml",
+        "tamasfe.even-better-toml",
+        // "openai.chatgpt"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "python.formatting.provider": "black",
+        "python.languageServer": "Pylance",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.organizeImports": "explicit"
+        },
+        "python.testing.pytestEnabled": true,
+        "python.testing.pytestArgs": [
+          "tests"
+        ],
+        "python.testing.unittestEnabled": false,
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  },
+  "onCreateCommand": "bash .devcontainer/scripts/on-create.sh"
+}
