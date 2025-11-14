@@ -17,14 +17,14 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
-          ls -la courses #/nd064_course_1/exercises/python-helloworld
+          ls -la . #courses/nd064_course_1/exercises/python-helloworld
           # python -m pip install --upgrade pip
           # pip install pytest
           # if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-        # working-directory: |
-        #   courses/nd064_course_1/exercises/python-helloworld
-      - name: Test with pytest
-        run: |
-          pytest
         working-directory: |
-          ../courses/nd064_course_1/exercises/python-helloworld
+          courses/nd064_course_1/exercises/python-helloworld
+      # - name: Test with pytest
+      #   run: |
+      #     pytest
+      #   working-directory: |
+      #     ../courses/nd064_course_1/exercises/python-helloworld
