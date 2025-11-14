@@ -1,0 +1,40 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Port-forward ArgoCD",
+            "type": "shell",
+            "command": "kubectl",
+            "args": [
+                "port-forward",
+                "svc/argocd-server",
+                "-n",
+                "argocd",
+                "8080:443"
+            ],
+            "problemMatcher": [],
+            "isBackground": true,
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            }
+        },
+        {
+            "label": "Recreated k3d kubeconfig",
+            "type": "shell",
+            "command": "k3d",
+            "args": [
+                "kubeconfig",
+                "merge",
+                "devcluster",
+                "--kubeconfig-switch-context"
+            ],
+            "problemMatcher": [],
+            "isBackground": true,
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            }
+        }
+    ]
+}

@@ -24,6 +24,8 @@
     "PIP_DISABLE_PIP_VERSION_CHECK": "1"
   },
   "forwardPorts": [
+    8080,
+    8443
     // 8000,
     // 8265,
     // 8501,
