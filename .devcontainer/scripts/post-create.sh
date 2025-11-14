@@ -60,8 +60,10 @@ fi
 
 printf '\nDev container post-create complete.\n'
 
-echo "Installing k3s"
+echo "Installing k3d"
 sudo apt update
 sudo apt install -y socat conntrack
-curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--docker" sh -
-sudo sh -c "k3s server --docker > /var/log/k3s.log 2>&1 &"
+curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
+
+echo "Creating k3d cluster"
+k3d cluster create devcluster
