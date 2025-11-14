@@ -21,7 +21,7 @@ jobs:
           pip install pytest
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         working-directory: |
-          ../../courses/nd064_course_1/exercises/python-helloworld
+          courses/nd064_course_1/exercises/python-helloworld
       - name: Test with pytest
         run: |
           pytest
