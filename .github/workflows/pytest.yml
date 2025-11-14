@@ -24,5 +24,4 @@ jobs:
       - name: Test with pytest
         run: |
           pytest
-        working-directory: |
-          courses/nd064_course_1/exercises/python-helloworld
+        working-directory: courses/nd064_course_1/exercises/python-helloworld
