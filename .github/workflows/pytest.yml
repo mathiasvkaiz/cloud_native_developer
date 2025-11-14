@@ -18,7 +18,7 @@ jobs:
       - name: Install dependencies
         run: |
           pwd
-          ls -la . #courses/nd064_course_1/exercises/python-helloworld
+          ls -la ./courses #courses/nd064_course_1/exercises/python-helloworld
           # python -m pip install --upgrade pip
           # pip install pytest
           # if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
