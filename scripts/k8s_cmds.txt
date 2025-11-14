@@ -1,0 +1,2 @@
+# set default kubectl namespace to argocd
+kubectl config set-context --current --namespace=argocd
