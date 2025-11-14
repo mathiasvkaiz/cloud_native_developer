@@ -4,14 +4,33 @@ set -euo pipefail
 WORKSPACE_DIR="${DEVCONTAINER_PROJECT_ROOT:-$(pwd)}"
 cd "$WORKSPACE_DIR"
 
+# Disable Docker credential helper (fixes token storage crash)
+echo "Configuring Docker credential store"
+mkdir -p ~/.docker
+cat << 'EOF' > ~/.docker/config.json
+{
+  "credsStore": ""
+}
+EOF
+
+# Load env variables
+if [ -f "$WORKSPACE_DIR/.env" ]; then
+  echo "Loading .env variables"
+  set -a
+  source "$WORKSPACE_DIR/.env"
+  set +a
+fi
+
 # Git config and credential manager
 echo "Configuring gh cli"
 git config --global user.email "mathias@vkaiz.de"
 git config --global user.name "mvk"
-gh auth login
+
+echo "Using token-based GitHub auth"
+gh auth status
 
 echo "Logging into docker registry"
-docker login
+echo "$DOCKER_TOKEN" | docker login --username "$DOCKER_USER" --password-stdin
 
 # Install requirements
 if [ -f requirements.txt ]; then
