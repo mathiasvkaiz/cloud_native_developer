@@ -17,7 +17,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
-          ls -la .
+          ls -la courses/nd064_course_1/exercises/python-helloworld
           # python -m pip install --upgrade pip
           # pip install pytest
           # if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
