@@ -2,14 +2,14 @@ apiVersion: v1
 kind: Deployment
 metadata:
   labels:
-    app: python-helloworld
-  name: python-helloworld
+    app: go-helloworld
+  name: go-helloworld
   namespace: {{ .Values.namespace.name }}
 spec:
   replicas: {{ .Values.replicaCound }}
   selector:
     matchLabels:
-      app: python-helloworld
+      app: go-helloworld
   strategy:
     rolliingUpdate:
       maxSurge: 25%
@@ -18,10 +18,10 @@ spec:
   template:
     metadata:
       labels:
-        app: python-helloworld
+        app: go-helloworld
     spec:
       containers:
       - image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
         imagePullPolicy: IfNotPresent
-        name: python-helloworld
+        name: go-helloworld
               
