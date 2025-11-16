@@ -6,7 +6,7 @@ metadata:
   name: go-helloworld
   namespace: {{ .Values.namespace.name }}
 spec:
-  replicas: {{ .Values.replicaCound }}
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: go-helloworld
