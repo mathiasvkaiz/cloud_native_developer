@@ -79,8 +79,8 @@ else
     --api-port 6443 \
     --servers 1 \
     --agents 0 \
-    -p "8080:80@loadbalancer" \
-    -p "8443:443@loadbalancer"
+    -p "8080:32080@server:0" \
+    -p "8443:32443@server:0"
 
   kubectl create namespace argocd
   kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
@@ -88,8 +88,27 @@ else
   echo "==> Waiting for ArgoCD pods to be ready..."
   kubectl wait --for=condition=Ready pods --all -n argocd --timeout=300s
 
-  echo "==> Patching ArgoCD service to LoadBalancer"
-  kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+  echo "==> Patching ArgoCD service to NodePort for direct access"
+  kubectl patch svc argocd-server -n argocd -p '
+  {
+    "spec": {
+      "type": "NodePort",
+      "ports": [
+        {
+          "name": "http",
+          "port": 80,
+          "nodePort": 32080,
+          "targetPort": 8080
+        },
+        {
+          "name": "https",
+          "port": 443,
+          "nodePort": 32443,
+          "targetPort": 8080
+        }
+      ]
+    }
+  }'
 fi
 
 # --- Install ArgoCD CLI ------------------------------------------------

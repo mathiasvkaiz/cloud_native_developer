@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: go-helloworld
+  name: go-helloworld
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: go-helloworld
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: go-helloworld
+    spec:
+      containers:
+        - image: mathiasvkaiz/go-helloworld:latest
+          imagePullPolicy: IfNotPresent
+          name: go-helloworld
+          resources:
+            requests:
+              cpu: 50m
+              memory: 256Mi

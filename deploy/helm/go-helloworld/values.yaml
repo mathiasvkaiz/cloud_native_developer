@@ -1,0 +1,8 @@
+namespace:
+  name: test
+
+image:
+  repository: mathiasvkaiz/go-helloworld
+  tag: latest
+
+replicaCount: 3

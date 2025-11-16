@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha
+kind: Application
+metadata:
+  name: go-helloworld
+  namespace: argocd
+spec:
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    helm:
+      valueFiles:
+        - values.yaml
+    path:
